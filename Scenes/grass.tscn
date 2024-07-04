@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=4 uid="uid://cr875anr82yow"]
+
+[ext_resource type="TileSet" uid="uid://dr2akpynobdy" path="res://Resources/isometric.tres" id="1_7s4f4"]
+[ext_resource type="Script" path="res://Scenes/grass.gd" id="1_kokuo"]
+[ext_resource type="PackedScene" uid="uid://rv2enta5cq4" path="res://Scenes/mob.tscn" id="2_pdal0"]
+[ext_resource type="PackedScene" uid="uid://cdahpgerwm8dy" path="res://Scenes/player.tscn" id="3_p87xo"]
+
+[sub_resource type="Curve2D" id="Curve2D_qxbcm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -98, -208, 0, 0, 0, 0, 458, -26, 0, 0, 0, 0, -50, 268, 0, 0, 0, 0, -561, -24, 0, 0, 0, 0, -146, -308, 0, 0, 0, 0, 31, -343, 0, 0, 0, 0, 66, -359, 0, 0, 0, 0, 48, -355, 0, 0, 0, 0, 1, -423, 0, 0, 0, 0, -25, -464, 0, 0, 0, 0, -63, -402.192, 0, 0, 0, 0, -101, -441, 0, 0, 0, 0, -197, -367, 0, 0, 0, 0, 60, -219.192, 0, 0, 0, 0, -169, -89.5165, 0, 0, 0, 0, -302, -87.0927, 0, 0, 0, 0, -168, -3.47018)
+}
+point_count = 17
+
+[node name="grass" type="Node2D"]
+script = ExtResource("1_kokuo")
+mob_scene = ExtResource("2_pdal0")
+
+[node name="Player" parent="." instance=ExtResource("3_p87xo")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAAAAAADAP7/AAAAAAAAAAAEAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAP7/AAAAAAAAAAAGAP//AAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAP7/AAAAAAAAAAAHAP//AAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAA=")
+tile_set = ExtResource("1_7s4f4")
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(647.656, 340)
+rotation = -0.322886
+
+[node name="MobPath" type="Path2D" parent="."]
+position = Vector2(630, 431)
+scale = Vector2(0.736016, 0.777322)
+curve = SubResource("Curve2D_qxbcm")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(-98, -208)
+rotation = 0.316345
+
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

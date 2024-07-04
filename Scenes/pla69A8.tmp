@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdahpgerwm8dy"]
+
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_gyjmc"]
+[ext_resource type="Texture2D" uid="uid://bnnbp47k5xa7j" path="res://Assets/kenney_platformer-art-extended-enemies/Alien sprites/alienBeige_walk1.png" id="1_u5xcp"]
+[ext_resource type="Texture2D" uid="uid://yeods11m1lff" path="res://Assets/kenney_platformer-art-extended-enemies/Alien sprites/alienBeige_walk2.png" id="2_tr3ga"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e1m3d"]
+radius = 22.0
+height = 88.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1rvy4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_u5xcp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tr3ga")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(2, 4)
+metadata/_edit_group_ = true
+
+[node name="player" type="Area2D" parent="."]
+script = ExtResource("1_gyjmc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+shape = SubResource("CapsuleShape2D_e1m3d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+sprite_frames = SubResource("SpriteFrames_1rvy4")
+animation = &"walk"

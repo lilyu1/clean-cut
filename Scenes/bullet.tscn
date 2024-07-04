@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnjew01mh4xnl"]
+
+[ext_resource type="Script" path="res://Scenes/bullet.gd" id="1_aford"]
+[ext_resource type="Texture2D" uid="uid://cpmaujttij3lc" path="res://Assets/laserRed01.png" id="2_mu1ew"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6p807"]
+radius = 4.0
+height = 54.0
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_aford")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6p807")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_mu1ew")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
