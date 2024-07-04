@@ -86,6 +86,8 @@ func _on_clean_cooldown_timeout():
 		mob.queue_free()
 		mob = null
 		can_clean = true
+		#increment score in main
+		get_parent().update_clean_score()
 		print("clean end")
 	
 

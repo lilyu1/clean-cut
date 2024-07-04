@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5ynnvqjkn5w5"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_py3q7"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_py3q7")
+
+[node name="scoreClean" type="Label" parent="."]
+offset_right = 146.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 60
+text = "0"
+
+[node name="scoreCut" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 83.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 60
+text = "0"

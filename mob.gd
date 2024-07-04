@@ -34,4 +34,5 @@ func _on_body_entered(body): #bullet entering body or when mobs hit each other
 	#move collision shape to three to dead mob layer
 	body.set_collision_layer_value(3,true)
 	body.set_collision_mask_value(3, true)
-	
+	#increment score in HUD
+	get_parent().update_cut_score()

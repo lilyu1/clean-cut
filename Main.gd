@@ -1,7 +1,8 @@
 extends Node
 
 @export var mob_scene: PackedScene
-var score
+var clean_score
+var cut_score
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	new_game()
@@ -14,20 +15,16 @@ func _process(delta):
 
 
 func game_over():
-	$ScoreTimer.stop()
 	$MobTimer.stop()
 
 func new_game():
-	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
-
-func _on_score_timer_timeout():
-	score += 1
+	clean_score = 0
+	cut_score = 0
 
 func _on_start_timer_timeout():
 	$MobTimer.start()
-	$ScoreTimer.start()
 
 func _on_mob_timer_timeout():
 	# Create a new instance of the Mob scene.
@@ -52,3 +49,11 @@ func _on_mob_timer_timeout():
 
 	# Spawn the mob by adding it to the Main scene.
 	add_child(mob)
+
+func update_clean_score():
+	clean_score += 1
+	$HUD.update_clean_score(clean_score)
+	
+func update_cut_score():
+	cut_score += 1
+	$HUD.update_cut_score(cut_score)
